@@ -46,14 +46,18 @@
       <li><strong>Statut :</strong> {{ game.status }}</li>
     </ul>
   {% endif %}
+{% for g in games %}
+  <li>
+    #{{ g.id }} – {{ g.name }} ({{ g.rows }}x{{ g.cols }}, {{ g.max_players }} joueurs) – 
+    <strong>{{ g.status }}</strong>
 
-  {% if games %}
-    <h2>📋 Parties existantes :</h2>
-    <ul>
-      {% for g in games %}
-        <li>#{{ g.id }} – {{ g.name }} ({{ g.rows }}x{{ g.cols }}, {{ g.max_players }} joueurs)</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-</body>
-</html>
+    {% if g.status == 'en attente' %}
+      <form method="POST" action="/start_game/{{ g.id }}" style="display:inline">
+        <button type="submit">Lancer</button>
+      </form>
+    {% else %}
+      ✅ Partie en cours
+    {% endif %}
+  </li>
+{% endfor %}
+
