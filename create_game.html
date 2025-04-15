@@ -33,31 +33,4 @@
     <button type="submit">Créer la partie</button>
   </form>
 
-  {% if game %}
-    <h2>✅ Partie créée avec succès :</h2>
-    <ul>
-      <li><strong>ID :</strong> {{ game.id }}</li>
-      <li><strong>Nom :</strong> {{ game.name }}</li>
-      <li><strong>Taille :</strong> {{ game.rows }} x {{ game.cols }}</li>
-      <li><strong>Max joueurs :</strong> {{ game.max_players }}</li>
-      <li><strong>Obstacles :</strong> {{ game.nb_obstacles }}</li>
-      <li><strong>Tours :</strong> {{ game.nb_rounds }}</li>
-      <li><strong>Timeout :</strong> {{ game.timeout }} s</li>
-      <li><strong>Statut :</strong> {{ game.status }}</li>
-    </ul>
-  {% endif %}
-{% for g in games %}
-  <li>
-    #{{ g.id }} – {{ g.name }} ({{ g.rows }}x{{ g.cols }}, {{ g.max_players }} joueurs) – 
-    <strong>{{ g.status }}</strong>
-
-    {% if g.status == 'en attente' %}
-      <form method="POST" action="/start_game/{{ g.id }}" style="display:inline">
-        <button type="submit">Lancer</button>
-      </form>
-    {% else %}
-      ✅ Partie en cours
-    {% endif %}
-  </li>
-{% endfor %}
-
+ 
