@@ -258,3 +258,6 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+
+# Note: Ce code est un client TCP qui se connecte à un serveur TCP. Il envoie des requêtes JSON et affiche les réponses dans une interface graphique Tkinter.
