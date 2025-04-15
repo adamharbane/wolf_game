@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""
-Client HTTP Terminal pour le projet 'Les Loups' – version avancée
--------------------------------------------------------------------
-Ce script permet d'interagir avec un serveur HTTP pour :
-  - Initialiser une partie
-  - Vérifier le statut du serveur
-  - Afficher l'historique des réponses reçues
-  - Réinitialiser les paramètres (option de redémarrage)
-Le script intègre une gestion avancée des erreurs et une journalisation détaillée.
-"""
+
 
 import requests
 import json
