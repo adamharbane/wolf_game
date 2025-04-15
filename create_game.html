@@ -34,8 +34,26 @@
   </form>
 
   {% if game %}
-    <h2>✅ Partie créée :</h2>
-    <pre>{{ game }}</pre>
+    <h2>✅ Partie créée avec succès :</h2>
+    <ul>
+      <li><strong>ID :</strong> {{ game.id }}</li>
+      <li><strong>Nom :</strong> {{ game.name }}</li>
+      <li><strong>Taille :</strong> {{ game.rows }} x {{ game.cols }}</li>
+      <li><strong>Max joueurs :</strong> {{ game.max_players }}</li>
+      <li><strong>Obstacles :</strong> {{ game.nb_obstacles }}</li>
+      <li><strong>Tours :</strong> {{ game.nb_rounds }}</li>
+      <li><strong>Timeout :</strong> {{ game.timeout }} s</li>
+      <li><strong>Statut :</strong> {{ game.status }}</li>
+    </ul>
+  {% endif %}
+
+  {% if games %}
+    <h2>📋 Parties existantes :</h2>
+    <ul>
+      {% for g in games %}
+        <li>#{{ g.id }} – {{ g.name }} ({{ g.rows }}x{{ g.cols }}, {{ g.max_players }} joueurs)</li>
+      {% endfor %}
+    </ul>
   {% endif %}
 </body>
 </html>
