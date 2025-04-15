@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer une partie – Admin Loups</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Créer une nouvelle partie</h1>
+
+  <form method="POST" action="/create_game">
+    <label>Nom de la partie :</label>
+    <input name="name" required>
+
+    <label>Lignes :</label>
+    <input name="rows" type="number" min="2" max="10" required>
+
+    <label>Colonnes :</label>
+    <input name="cols" type="number" min="2" max="10" required>
+
+    <label>Max joueurs :</label>
+    <input name="max_players" type="number" min="2" max="10" required>
+
+    <label>Obstacles :</label>
+    <input name="nb_obstacles" type="number" min="0" required>
+
+    <label>Tours :</label>
+    <input name="nb_rounds" type="number" min="1" required>
+
+    <label>Temps max/tour (s) :</label>
+    <input name="timeout" type="number" min="5" max="300" required>
+
+    <button type="submit">Créer la partie</button>
+  </form>
+
+ 
