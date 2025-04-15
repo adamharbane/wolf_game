@@ -87,3 +87,7 @@ if __name__ == "__main__":
 
 
 
+# This code is a simple HTTP client application using Tkinter for the GUI.
+# It allows the user to specify an HTTP URL and method (GET or POST),
+# input a JSON request, and view the HTTP response.
+# The application handles JSON parsing and displays errors in a message box.
