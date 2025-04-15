@@ -18,6 +18,7 @@ services:
       POSTGRES_DB: flask_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./:/docker-entrypoint-initdb.d
 
 volumes:
   postgres_data:
