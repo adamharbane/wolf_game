@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Pour stocker temporairement les parties (tu pourras remplacer ça par PostgreSQL plus tard)
+
 games = []
 game_counter = 1
 
