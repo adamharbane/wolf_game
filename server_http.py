@@ -8,38 +8,32 @@ import sys
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False  # Pour conserver l'ordre dans les réponses JSON
 
-# Configuration du logging
+
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] %(levelname)s: %(message)s",
     handlers=[logging.StreamHandler(sys.stdout)]
 )
 
-# --- Fonctions stubs pour simuler la communication ---
+
 
 def send_to_admin(message):
-    """
-    Simulation d'envoi d'un message vers l'admin_engine via TCP.
-    Retourne une réponse simulée.
-    """
+   
     logging.info(f"(Simulé) Envoi à admin_engine: {message}")
-    # On peut simuler différentes réponses en fonction du message
+    
     if message.startswith("CREATE_GAME:"):
         game_name = message.split(":", 1)[1]
         return f"Partie '{game_name}' créée avec succès."
     elif message == "LIST_GAMES":
         return [1, 2, 3]
     elif message.startswith("SUBSCRIBE:"):
-        # Retourne un rôle et un id_player simulés.
+        
         return {"role": "wolf", "id_player": 23}
     else:
         return f"Réponse simulée pour {message}"
 
 def send_move(player_id, game_id, row, col):
-    """
-    Simulation d'un appel gRPC vers le moteur de jeu (game_engine) pour exécuter un déplacement.
-    Ici, on simule simplement un résultat "OK" pour tout déplacement.
-    """
+ 
     logging.info(f"(Simulé) Appel gRPC : player_id={player_id}, game_id={game_id}, move=({row}, {col})")
     # Simule une réponse du game_engine ; vous pouvez simuler plus d'informations ici.
     return "OK"
@@ -48,16 +42,12 @@ def send_move(player_id, game_id, row, col):
 
 @app.route("/")
 def home():
-    """Page d'accueil du serveur HTTP."""
+  
     return jsonify({"message": "Bienvenue sur le serveur HTTP du jeu Les Loups 🐺"})
 
 @app.route("/start", methods=["POST"])
 def start_game():
-    """
-    Démarre une nouvelle partie.
-    Entrée attendue : JSON avec la clé "name" pour le nom de la partie.
-    Utilise send_to_admin pour communiquer avec l'admin_engine (simulé).
-    """
+ 
     try:
         data = request.get_json(force=True)
         game_name = data.get("name")
@@ -73,11 +63,7 @@ def start_game():
 
 @app.route("/move", methods=["POST"])
 def move():
-    """
-    Exécute un déplacement dans une partie.
-    Entrée attendue : JSON contenant "player_id", "game_id" et "move" (ex: "01").
-    Utilise send_move pour appeler le moteur de jeu (simulé en gRPC).
-    """
+  
     try:
         data = request.get_json(force=True)
         for field in ("player_id", "game_id", "move"):
@@ -89,7 +75,7 @@ def move():
         if not (isinstance(move_str, str) and len(move_str) == 2):
             raise ValueError("Le paramètre move doit être une chaîne de 2 caractères.")
         
-        # Extraction de la direction pour log (ici simple)
+     
         row = int(move_str[0])
         col = int(move_str[1])
         logging.info(f"Demande de déplacement: player_id={player_id}, game_id={game_id}, move={move_str}")
