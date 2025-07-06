@@ -2,11 +2,7 @@
 import socket
 import threading
 import json
-import grpc  # Vous aurez besoin de grpcio et grpcio-tools installés
-# Importez ici vos stubs générés à partir de game_engine.proto.
-# Par exemple :
-# from game_engine_pb2 import MoveRequest
-# from game_engine_pb2_grpc import GameEngineStub
+import grpc  #
 
 class TCPServer:
     def __init__(self, host="0.0.0.0", port=5001):
@@ -61,7 +57,7 @@ class TCPServer:
         """
         action = req.get("action")
         parameters = req.get("parameters", [])
-        # Vous pouvez ajouter ici un traçage détaillé des paramètres
+       
         print(f"Action demandée: {action} avec paramètres: {parameters}")
         
         # Pour l'exemple, voici des réponses simulées pour chaque action
@@ -86,12 +82,10 @@ class TCPServer:
                 "move": {"next_position": {"row": 0, "col": 1}}
             }}}
         elif action == "gameboard_status":
-            # Action : Récupérer l'état du plateau
-            # On renvoie un string de cellules par exemple "010010000"
+           
             return {"status": "OK", "response": {"visible_cells": "010010000"}}
         elif action == "move":
-            # Action : Réaliser un déplacement
-            # On attend des paramètres : id_party, id_player et move
+            
             if len(parameters) < 3:
                 return {"status": "KO", "response": "Paramètres insuffisants pour le déplacement"}
             move_value = None
@@ -104,21 +98,7 @@ class TCPServer:
             
             # Ici, appelons le moteur de jeu via gRPC.
             try:
-                # Exemple d'appel gRPC (vous devez adapter selon vos stubs):
-                # with grpc.insecure_channel("localhost:50051") as channel:
-                #     stub = GameEngineStub(channel)
-                #     grpc_request = MoveRequest(
-                #         id_party=...,
-                #         id_player=...,
-                #         move=move_value
-                #     )
-                #     grpc_response = stub.Move(grpc_request)
-                #     # Convertir grpc_response en dictionnaire ou formater la réponse JSON
-                #     result = {
-                #         "round_in_progress": grpc_response.round_in_progress,
-                #         "move": {"next_position": {"row": grpc_response.next_position.row, "col": grpc_response.next_position.col}}
-                #     }
-                # Simulons cette réponse :
+             
                 result = {"round_in_progress": 12, "move": {"next_position": {"row": 0, "col": 1}}}
                 return {"status": "OK", "response": result}
             except Exception as e:
