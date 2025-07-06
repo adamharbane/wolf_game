@@ -9,21 +9,19 @@ class TCPClientApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Client TCP - Les Loups")
-        
-        # Variables de connexion
+      
         self.host_var = tk.StringVar(value="127.0.0.1")
         self.port_var = tk.StringVar(value="5001")
         
-        # Variable de requête JSON (modifiable manuellement aussi)
         self.request_text = tk.StringVar(value='{"action": "list", "parameters": []}')
         
-        # Zone d'affichage pour les logs
+        
         self.log_text = None
         
-        # Zone dédiée aux notifications
+    
         self.notify_list = None
 
-        # Socket et thread pour la réception
+       
         self.client_socket = None
         self.receive_thread = None
         self.running = False
@@ -156,8 +154,7 @@ class TCPClientApp:
         """Ajoute une notification dans la zone de notifications et affiche éventuellement une pop-up."""
         if self.notify_list:
             self.notify_list.insert(tk.END, message)
-        # Optionnel : afficher une pop-up de notification
-        # messagebox.showinfo("Notification", message)
+       
     
     # Vérifie la réponse pour voir si c'est une notification à afficher
     def check_for_notification(self, response):
@@ -168,10 +165,10 @@ class TCPClientApp:
             if "response" in response and "party" in response["response"]:
                 party_info = response["response"]["party"]
                 if "round_in_progress" in party_info and party_info["round_in_progress"] != -1:
-                    # On construit un message de notification
+                   
                     note = f"Tour en cours: Partie {party_info.get('id_party')}, Action du joueur {party_info.get('id_player')}, prochaine position: {party_info['move'].get('next_position')}"
                     self.notify(note)
-        # Vous pouvez étendre cette logique pour d'autres types de notifications
+      
 
     # Méthodes pour envoyer les requêtes prédéfinies
     def send_list(self):
@@ -260,4 +257,3 @@ if __name__ == "__main__":
 
 
 
-# Note: Ce code est un client TCP qui se connecte à un serveur TCP. Il envoie des requêtes JSON et affiche les réponses dans une interface graphique Tkinter.
